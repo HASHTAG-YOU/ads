@@ -8,23 +8,22 @@
 
 ## Table of Contents
 
-- [Development Environment and Tech Stack](#development-environment-and-tech-stack)
-- [Getting Started](#getting-started)
-- [Project Structure](#project-structure)
-- [Testing](#testing)
-- [License](#license)
+- 1.[Development Environment and Tech Stack](#development-environment-and-tech-stack)
+- 2.[Getting Started](#getting-started)
+- 3.[Project Structure](#project-structure)
+- 4.[Testing](#testing)
 
-## Development Environment and Tech Stack
+## 1. Development Environment and Tech Stack
 
 - **Programming Language:** Python 3.11
 - **Framework:** FastAPI  
   → 경량 고성능 API 서버 구축을 위해 선택했습니다.
 - **ASGI Server:** Uvicorn  
   → FastAPI와 최적화된 고성능 비동기 서버, WebSocket 통신 지원.
-- **Database:** Redis (7.2)  
+- **Database:** Redis  
   → 실시간 데이터 저장과 빠른 조회를 위한 인메모리 데이터베이스 사용.
 
-### Core Libraries
+### 1.1. Core Libraries
 
 - `fastapi`: 비동기 웹 API 서버 구축 프레임워크
 - `uvicorn[standard]`: FastAPI 실행용 고성능 ASGI 서버
@@ -35,21 +34,21 @@
 
 ---
 
-## Getting Started
+## 2. Getting Started
 
-### 1. 환경 변수 설정
+### 2.1. 환경 변수 설정
 
-루트 디렉토리에 이미 `.env` 파일이 존재합니다:
-(※ 별도 수정이 필요한 경우 다음을 참고하세요.): 
+루트 디렉토리에 이미 `.env` 파일이 존재합니다.
+(※ 별도 수정이 필요한 경우 다음을 참고하세요.)
 
 ```bash
 FASTAPI_PORT=8081
 REDIS_PORT=6384
 ```
 
-### 2. Docker로 전체 시스템 실행
+### 2.2. Docker로 전체 시스템 실행
 
-아래 명령어로 FastAPI 서버, Redis 서버를 빌드 및 실행할 수 있습니다. 서버 기동 후 `test_api.py`가 자동 실행되어 API 테스트를 완료합니다:
+아래 명령어로 FastAPI 서버, Redis 서버를 빌드 및 실행할 수 있습니다. 이후 `test_api.py`가 자동 실행되어 API 테스트를 완료합니다:
 
 ```bash
 docker compose up --build
@@ -71,7 +70,7 @@ docker compose up --build
 
 ---
 
-## Project Structure
+## 3. Project Structure
 
 ```
 .
@@ -103,15 +102,15 @@ docker compose up --build
 
 ---
 
-## Testing
+## 4. Testing
 
-### 테스트 실행 방법
+### 4.1. 테스트 실행 방법
 
 ```bash
 docker compose up test_api --build
 ```
 
-### 테스트 항목
+### 4.2. 테스트 항목
 
 - 정상 GGA 문장 업로드
 - 잘못된 파일 확장자 업로드 (.pdf 등)
