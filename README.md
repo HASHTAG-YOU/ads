@@ -36,19 +36,10 @@
 
 ## 2. Getting Started
 
-### 2.1. 환경 변수 설정
 
-루트 디렉토리에 이미 `.env` 파일이 존재합니다.
-(※ 별도 수정이 필요한 경우 다음을 참고하세요.)
+### 2.1. Docker로 전체 시스템 실행
 
-```bash
-FASTAPI_PORT=8081
-REDIS_PORT=6384
-```
-
-### 2.2. Docker로 전체 시스템 실행
-
-아래 명령어로 FastAPI 서버, Redis 서버를 빌드 및 실행할 수 있습니다. 이후 `test_api.py`가 자동 실행되어 API 테스트를 완료합니다:
+아래 명령어로 FastAPI 서버, Redis 서버를 빌드 및 실행할 수 있습니다. 이후 `test_api.py`가 자동 실행되어 API 테스트를 완료합니다.
 
 ```bash
 docker compose up --build
@@ -60,6 +51,13 @@ docker compose up --build
 - **Swagger UI:** [http://localhost:8000/docs](http://localhost:8000/docs)
 - **Static Page (index.html):** [http://localhost:8000/](http://localhost:8000/)
 
+
+(※ 별도 포트 지정이 필요한 경우 .env 파일을 수정하세요.)
+
+```bash
+FASTAPI_PORT=8081
+REDIS_PORT=6384
+```
 
 ### 요약 명령어
 
