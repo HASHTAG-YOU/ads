@@ -1,1 +1,159 @@
-# ads
+물론입니다! 요청하신 내용을 깔끔하고 통일된 형식으로 정리해서 README 파일로 만들어드렸어요. 확인해보세요:
+
+---
+
+# Avikus Backend Pre-assignment
+
+## Introduction
+
+본 프로젝트는 **FastAPI**와 **Redis**를 기반으로 한 경량 고성능 백엔드 API 서버 구축 과제입니다. WebSocket 통신을 지원하며, 실시간 데이터 처리 및 다양한 예외 상황에 대한 테스트를 포함하고 있습니다.
+
+## Table of Contents
+
+- [Development Environment and Tech Stack](#development-environment-and-tech-stack)
+- [Getting Started](#getting-started)
+- [Project Structure](#project-structure)
+- [Testing](#testing)
+- [License](#license)
+
+## Development Environment and Tech Stack
+
+- **Programming Language:** Python 3.11
+- **Framework:** FastAPI  
+  → 경량 고성능 API 서버 구축을 위해 선택했습니다.
+- **ASGI Server:** Uvicorn  
+  → FastAPI와 최적화된 고성능 비동기 서버, WebSocket 통신 지원.
+- **Database:** Redis (7.2)  
+  → 실시간 데이터 저장과 빠른 조회를 위한 인메모리 데이터베이스 사용.
+
+### Core Libraries
+
+- `fastapi`: 비동기 웹 API 서버 구축 프레임워크
+- `uvicorn[standard]`: FastAPI 실행용 고성능 ASGI 서버
+- `python-multipart`: 파일 업로드 요청 처리 지원
+- `redis`: Redis 서버와의 연결 및 데이터 저장/조회 처리
+- `pytest`: API 기능 및 예외 상황 자동화 테스트 프레임워크
+- `httpx`: HTTP 요청 및 WebSocket 통신 테스트 클라이언트
+
+---
+
+## Getting Started
+
+### 1. 환경 변수 설정
+
+`.env` 파일을 생성하고 다음 값을 설정합니다:
+
+```bash
+FASTAPI_PORT=8081
+REDIS_PORT=6384
+```
+
+### 2. Docker로 전체 시스템 실행
+
+아래 명령어로 FastAPI 서버, Redis 서버를 빌드 및 실행할 수 있습니다. 서버 기동 후 `test_api.py`가 자동 실행되어 API 테스트를 완료합니다:
+
+```bash
+docker compose up --build
+```
+
+**접속 주소:**
+
+- **Swagger UI:** [http://localhost:8000/docs](http://localhost:8000/docs)
+- **Static Page (index.html):** [http://localhost:8000/](http://localhost:8000/)
+
+### 3. 별도 테스트 실행
+
+서버가 실행 중인 상태에서 테스트만 다시 실행하려면:
+
+```bash
+docker compose up test_api
+```
+
+### 요약 명령어
+
+| 명령어 | 설명 |
+|:-------|:-----|
+| `docker compose up --build` | FastAPI + Redis + 테스트까지 실행 |
+| `docker compose up api redis --build` | FastAPI + Redis만 실행 |
+| `docker compose up test --build` | 테스트만 실행 |
+
+---
+
+## Project Structure
+
+```
+.
+├── .env                  # 환경 변수 파일 (FastAPI 포트, Redis 포트 설정)
+├── docker-compose.yml    # FastAPI + Redis를 함께 실행하는 Docker 설정 파일
+├── Dockerfile            # FastAPI 서버 Docker 이미지 빌드 파일
+├── requirements.txt      # 프로젝트에 필요한 Python 라이브러리 목록
+├── static/
+│   └── index.html         # 기본 정적 페이지 (파일 업로드 UI)
+├── app/
+│   ├── main.py            # FastAPI 엔트리포인트 (라우팅, 예외 처리 설정)
+│   ├── exception.py       # 커스텀 예외 및 에러 코드 관리
+│   ├── gga_parser.py      # GGA 문장 파싱 로직
+│   ├── redis_handler.py   # Redis 연결 및 데이터 저장/조회 처리
+│   ├── websocket.py       # WebSocket을 통한 실시간 데이터 전송 처리
+│   └── schemas.py         # 에러 응답 스키마 정의 (Pydantic 모델)
+├── test/
+│   ├── valid_gga.txt              # 정상 GGA 문장 샘플
+│   ├── invalid_extension.pdf      # 잘못된 확장자 테스트 파일
+│   ├── invalid_encoding.txt       # UTF-8 인코딩 오류 테스트 파일
+│   ├── large_file.txt              # 10MB 초과 테스트 파일
+│   ├── no_gpgga.txt                # GPGGA 문장 없는 테스트 파일
+│   ├── all_checksum_failed.txt     # 체크섬 오류 테스트 파일
+│   ├── gga_parsing_failed.txt      # GGA 문장 파싱 오류 테스트 파일
+│   ├── mixed_valid_invalid.txt     # 정상+오류 문장이 섞인 테스트 파일
+│   └── example.txt                 # 정상 예시 파일
+├── test_api.py            # 주요 API 기능 검증용 pytest 스크립트
+```
+
+---
+
+## Testing
+
+### 테스트 실행 방법
+
+```bash
+docker compose up test_api --build
+```
+
+### 테스트 항목
+
+- 정상 GGA 문장 업로드
+- 잘못된 파일 확장자 업로드 (.pdf 등)
+- 파일 크기 초과 오류 (10MB 초과)
+- UTF-8 인코딩 오류 파일 업로드
+- GPGGA 문장이 없는 파일 업로드
+- 모든 GGA 문장의 체크섬 검증 실패
+- GGA 문장 형식 파싱 실패
+- WebSocket 정상 연결 및 데이터 수신 테스트
+
+### 테스트 데이터
+
+테스트 파일 목록:
+
+```
+test/valid_gga.txt
+test/invalid_extension.pdf
+test/invalid_encoding.txt
+test/large_file.txt
+test/no_gpgga.txt
+test/all_checksum_failed.txt
+test/gga_parsing_failed.txt
+test/mixed_valid_invalid.txt
+```
+
+---
+
+## License
+
+본 프로젝트는 과제 제출용으로 별도의 라이선스가 명시되어 있지 않습니다.
+
+---
+
+추가로 "Contributors" 항목이나, 문서나 코드에 대한 자세한 "Configuration" 섹션을 넣고 싶다면 말씀해 주세요!   
+필요하면 더 다듬어서 **영문 버전**으로도 정리해드릴 수 있습니다. 😄
+
+추가 요청사항 있을까요? (예: 배포 방법, 주요 API 엔드포인트 설명 추가 등)
