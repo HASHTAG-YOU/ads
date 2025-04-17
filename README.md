@@ -1,10 +1,10 @@
 ---
 
-# Avikus Backend Pre-assignment
+# 실시간 항법 정보 처리 시스템
 
 ## Introduction
 
-본 프로젝트는 NMEA GGA 데이터를 실시간으로 처리하고, 파일 업로드 및 WebSocket 기반 전송 기능을 제공하는 FastAPI 기반 백엔드 시스템입니다.
+본 프로젝트는 사용자가 업로드한 선박 항법(GPS) 데이터를 검증 및 파싱하여 Redis에 저장하고, WebSocket을 통해 실시간으로 제공하는 백엔드 시스템입니다.
 
 ## Table of Contents
 
@@ -23,7 +23,7 @@
 - **Database:** Redis  
   → 실시간 데이터 저장과 빠른 조회를 위한 인메모리 데이터베이스 사용.
 
-### 1.1. Core Libraries
+### Core Libraries
 
 - `fastapi`: 비동기 웹 API 서버 구축 프레임워크
 - `uvicorn[standard]`: FastAPI 실행용 고성능 ASGI 서버
@@ -37,7 +37,7 @@
 ## 2. Getting Started
 
 
-### 2.1. Docker로 전체 시스템 실행
+### 전체 시스템 실행
 
 아래 명령어로 FastAPI 서버, Redis 서버를 빌드 및 실행할 수 있습니다. 이후 `test_api.py`가 자동 실행되어 API 테스트를 완료합니다.
 
@@ -52,7 +52,7 @@ docker compose up --build
 - **Static Page (index.html):** [http://localhost:8000/](http://localhost:8000/)
 
 
-(※ 별도 포트 지정이 필요한 경우 .env 파일을 수정하세요.)
+(※ 별도 포트 지정이 필요한 경우 루트 디렉토리 .env 파일을 수정하세요.)
 
 ```bash
 FASTAPI_PORT=8081
