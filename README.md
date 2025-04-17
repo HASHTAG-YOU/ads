@@ -4,14 +4,14 @@
 
 ## Introduction
 
-본 프로젝트는 **FastAPI**와 **Redis**를 기반으로 한 경량 고성능 백엔드 API 서버 구축 과제입니다. WebSocket 통신을 지원하며, 실시간 데이터 처리 및 다양한 예외 상황에 대한 테스트를 포함하고 있습니다.
+본 프로젝트는 NMEA GGA 데이터를 실시간으로 처리하고, 파일 업로드 및 WebSocket 기반 전송 기능을 제공하는 FastAPI 기반 백엔드 시스템입니다.
 
 ## Table of Contents
 
-- 1.[Development Environment and Tech Stack](#development-environment-and-tech-stack)
-- 2.[Getting Started](#getting-started)
-- 3.[Project Structure](#project-structure)
-- 4.[Testing](#testing)
+- [Development Environment and Tech Stack](#development-environment-and-tech-stack)
+- [Getting Started](#getting-started)
+- [Project Structure](#project-structure)
+- [Testing](#testing)
 
 ## 1. Development Environment and Tech Stack
 
