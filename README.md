@@ -52,12 +52,7 @@ docker compose up --build
 - **Static Page (index.html):** [http://localhost:8000/](http://localhost:8000/)
 
 
-(※ 별도 포트 지정이 필요한 경우 루트 디렉토리 .env 파일을 수정하세요.)
-
-```bash
-FASTAPI_PORT=8081
-REDIS_PORT=6384
-```
+※ 별도의 포트 설정이 필요한 경우, 루트 디렉터리의 .env 파일에서 FASTAPI_PORT 및 REDIS_PORT 값을 직접 수정하여 적용할 수 있습니다.
 
 ### 요약 명령어
 
